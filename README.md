@@ -1,1 +1,1 @@
-# hackers-lair
+Basic CTF website
