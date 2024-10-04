@@ -38,10 +38,10 @@
 
 - Update base image to `python:3.11-slim-bookworm`
 - Added prefix option to S3 uploader under `AWS_S3_CUSTOM_PREFIX`
-  - This allows CTFd to store files under a folder of an S3 bucket
+  - This allows MCSCto store files under a folder of an S3 bucket
 - Raise exception if a built-in config is defined in the extra config section in config.ini
-- CTFd will wait for an import to complete before starting
-  - This tries to address issues where starting CTFd during an import can interfere with the import
+- MCSCwill wait for an import to complete before starting
+  - This tries to address issues where starting MCSCduring an import can interfere with the import
 - Add Pillow version 10.1.0 as a dependency
 - Update boto3 version to 1.34.39
 - Update isort version to 5.13.2
@@ -104,7 +104,7 @@
 
 **Deployment**
 
-- Add new envvar `SKIP_DB_PING` to instruct the CTFd Docker image to not test if the database server is available
+- Add new envvar `SKIP_DB_PING` to instruct the MCSCDocker image to not test if the database server is available
 - Add new config `AWS_S3_ADDRESSING_STYLE`
   - Support selecting the [S3 addressing style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html#access-bucket-console-ex). It defaults to "auto" as when it's not set, but can also be set to `virtual` or `path`
 - Add new config `AWS_S3_CUSTOM_DOMAIN` which specifies a domain that replaces the default one in presigned download URLs
@@ -123,7 +123,7 @@
 
 **Themes**
 
-- core-beta is now provided in all CTFd instances
+- core-beta is now provided in all MCSCinstances
 - core-beta is the default theme during setup
 
 # 3.5.3 / 2023-06-08
@@ -152,11 +152,11 @@
 
 - Slim down Docker image by removing several dependencies not needed for production usage
   - The image size has been reduced from 648MB to 398MB
-- In the Docker image run CTFd in a virtual environment located at `/opt/venv`
+- In the Docker image run MCSCin a virtual environment located at `/opt/venv`
 - Add freezegun to application dependencies
 - Bump dependencies for pybluemonday, redis, SQLAlchemy-Utils, python-geoacumen-city
 - Fix race conditions on cache healthcheck
-- Fix situations where numeric config items in config.ini could cause CTFd to not start
+- Fix situations where numeric config items in config.ini could cause MCSCto not start
 
 # 3.5.1 / 2023-01-23
 
@@ -195,7 +195,7 @@
 
 - Imports have been disabled when running with a SQLite database backend
   - See https://github.com/CTFd/CTFd/issues/2131
-- Added `/healthcheck` endpoint to check if CTFd is ready
+- Added `/healthcheck` endpoint to check if MCSCis ready
 - There are now ARM Docker images for OSS CTFd
 - Bump dependencies for passlib, bcrypt, requests, gunicorn, gevent, python-geoacumen-city, cmarkgfm
 - Properly load `SAFE_MODE` config from environment variable
@@ -247,7 +247,7 @@
 - Imports now happen in the background so that admins can watch the status of the import
   - Add progress tracking to backup/export importing
   - Add `GET /admin/import` to see status of import
-  - The public user facing portion of CTFd is now disabled during imports
+  - The public user facing portion of MCSCis now disabled during imports
 - Fix issue where custom field entries for Users and Teams would be misaligned in the scoreboard CSV export
 - Show admins the email server error message when email sending fails
 - Fix issue where the current theme cannot be found in list of themes
@@ -281,13 +281,13 @@
 
 **Plugins**
 
-- `CTFd._internal.challenge.render` and `CTFd._internal.challenge.renderer` in the `view.js` Challenge type file has been deprecated. Instead Challenge plugins should refer to the `challenge.html` attribute provided by the API. Essentially CTFd is moving to having markdown & HTML rendered by the server instead of rendering on the client.
+- `CTFd._internal.challenge.render` and `CTFd._internal.challenge.renderer` in the `view.js` Challenge type file has been deprecated. Instead Challenge plugins should refer to the `challenge.html` attribute provided by the API. Essentially MCSCis moving to having markdown & HTML rendered by the server instead of rendering on the client.
 
 **Themes**
 
 - Create the [`core-beta` theme](https://github.com/CTFd/core-beta) and begin documenting the creation of themes using Vite
-- Add `userName` and `userEmail` to the CTFd init object in `base.html` for easier integration with other JavaScript code
-- Add `teamId` and `teamName` to the CTFd init object in `base.html` for easier integration with other JavaScript code
+- Add `userName` and `userEmail` to the MCSCinit object in `base.html` for easier integration with other JavaScript code
+- Add `teamId` and `teamName` to the MCSCinit object in `base.html` for easier integration with other JavaScript code
 - Adds the `Assets` constant to access front end assets from Jinja templates
 - Adds a `views.themes_beta` route to avoid the `.dev`/`.min` extension being added automatically to frontend asset urls
 
@@ -346,7 +346,7 @@
 
 **Deployment**
 
-- Serve all assets from CTFd regardless of internet availability (i.e. fonts and font-awesome)
+- Serve all assets from MCSCregardless of internet availability (i.e. fonts and font-awesome)
 - Fix regression in `REVERSE_PROXY` to allow comma seperated integers
 - Bump `flask-restx` to 0.5.1
 - Bump `pybluemonday` to 0.0.9
@@ -390,8 +390,8 @@
 
 **Themes**
 
-- CTFd now has the `THEME_FALLBACK` option enabled by default. This allows users to provide incomplete themes. Missing theme files will be provided from the built-in core theme
-- CTFd will now pass the title of a Page over to the template when rendering
+- MCSCnow has the `THEME_FALLBACK` option enabled by default. This allows users to provide incomplete themes. Missing theme files will be provided from the built-in core theme
+- MCSCwill now pass the title of a Page over to the template when rendering
 - No longer show the token type in user settings
 - Added `window.BETA_sortChallenges` to `/challenges` so that theme code can more easily define how to sort challenges
   - Note that this functionality is beta because we expect to revamp the entire themes system
@@ -431,7 +431,7 @@
 - Added `solves` and `solved_by_me` fields to the Swagger documentation for Challenges
 - Dynamic challenges will now take their initial valuation from the `inital` keyword instead of the previous `value` keyword.
   - This allows ctfcli to manage dynamic challenges. See https://github.com/CTFd/CTFd/issues/1875
-- Added a timestamp to a CTFd export's filename
+- Added a timestamp to a MCSCexport's filename
 - Deleting uploads under the Filesystem upload provider will now delete the parent folder as well as the target file
 
 # 3.3.1 / 2021-07-15
@@ -462,7 +462,7 @@
 **Themes**
 
 - Add a `THEME_FALLBACK` config to help develop themes.
-  - `THEME_FALLBACK` will configure CTFd to try to find missing theme files in the default built-in `core` theme.
+  - `THEME_FALLBACK` will configure MCSCto try to find missing theme files in the default built-in `core` theme.
   - This makes it easier to develop themes or use incomplete themes.
 - Allow for one theme to reference and inherit from another theme through approaches like `{% extends "core/page.html" %}`
 - Allow for the automatic date rendering format to be overridden by specifying a `data-time-format` attribute.
@@ -538,7 +538,7 @@
 **API**
 
 - Addition of `POST /api/v1/teams/me/members` to generate invite tokens for teams
-- Fixed an issue in `POST /api/v1/awards` where CTFd would 500 when a user could not be found by the provided `user_id`
+- Fixed an issue in `POST /api/v1/awards` where MCSCwould 500 when a user could not be found by the provided `user_id`
 - `POST /api/v1/unlocks` in teams mode now uses the team's score to determine if a user can purchase a hint
   - Properly check for existing unlocks in teams mode in `POST /api/v1/unlocks`
 - `/api/v1/notifications` and `/api/v1/notifications/[notification_id]` now have an html parameter which specifies the rendered content of the notification content
@@ -634,7 +634,7 @@
 
 - Loosen team password confirmation in team settings to also accept the team captain's password to make it easier to change the team password
 - Adds the ability to add custom user and team fields for registration/profile settings.
-- Improve Notifications pubsub events system to use a subscriber per server instead of a subscriber per browser. This should improve the reliability of CTFd at higher load and make it easier to deploy the Notifications system
+- Improve Notifications pubsub events system to use a subscriber per server instead of a subscriber per browser. This should improve the reliability of MCSCat higher load and make it easier to deploy the Notifications system
 
 **Admin Panel**
 
@@ -663,8 +663,8 @@
 - Add `tenacity` library for retrying logic
 - Add `pytest-sugar` for slightly prettier pytest output
 - Add a `listen()` method to `CTFd.utils.events.EventManager` and `CTFd.utils.events.RedisEventManager`.
-  - This method should implement subscription for a CTFd worker to whatever underlying notification system there is. This should be implemented with gevent or a background thread.
-  - The `subscribe()` method (which used to implement the functionality of the new `listen()` function) now only handles passing notifications from CTFd to the browser. This should also be implemented with gevent or a background thread.
+  - This method should implement subscription for a MCSCworker to whatever underlying notification system there is. This should be implemented with gevent or a background thread.
+  - The `subscribe()` method (which used to implement the functionality of the new `listen()` function) now only handles passing notifications from MCSCto the browser. This should also be implemented with gevent or a background thread.
 
 # 3.0.2 / 2020-08-23
 
@@ -713,31 +713,31 @@
 
 ## Changelog Summary
 
-The CTFd v3 Changelog represents the changes from v2.5.0 to v3. It is a summarized version of the changes that occured in all CTFd v3 beta/alpha releases.
+The MCSCv3 Changelog represents the changes from v2.5.0 to v3. It is a summarized version of the changes that occured in all MCSCv3 beta/alpha releases.
 
-CTFd v3 contains some breaking changes but many plugins remain compatible. Themes will need some minor changes to be compatible with v3.
+MCSCv3 contains some breaking changes but many plugins remain compatible. Themes will need some minor changes to be compatible with v3.
 
-These changes are made with great consideration to existing installations and for the health of the overall CTFd project. If you rely on specific behavior, you can always download the last CTFd v2 release on Github. Official plugin/theme updates will be sent to the email addresses on file.
+These changes are made with great consideration to existing installations and for the health of the overall MCSCproject. If you rely on specific behavior, you can always download the last MCSCv2 release on Github. Official plugin/theme updates will be sent to the email addresses on file.
 
-The major changes in CTFd v3 are as follows with the detailed changelog beneath:
+The major changes in MCSCv3 are as follows with the detailed changelog beneath:
 
 - ### Server Side HTML/Markdown Rendering
 
-HTML rendering in some cases (challenge description rendering, hint content rendering) has been moved to the server side. Previously it was rendered by the browser but this led to a lot of duplicated behavior and complexity in some plugins. Rendering that HTML content on the server allows CTFd to take more advantage of theme content and reduce duplicated code across themes.
+HTML rendering in some cases (challenge description rendering, hint content rendering) has been moved to the server side. Previously it was rendered by the browser but this led to a lot of duplicated behavior and complexity in some plugins. Rendering that HTML content on the server allows MCSCto take more advantage of theme content and reduce duplicated code across themes.
 
-In addition, HTML sanitization can be enabled on the CTFd installation to prevent the injection of malicious scripts in HTML content.
+In addition, HTML sanitization can be enabled on the MCSCinstallation to prevent the injection of malicious scripts in HTML content.
 
 - ### CommonMark
 
-CTFd now uses [CommonMark](https://commonmark.org/) for HTML/Markdown rendering. This leads to much more consistent rendering of HTML/Markdown content.
+MCSCnow uses [CommonMark](https://commonmark.org/) for HTML/Markdown rendering. This leads to much more consistent rendering of HTML/Markdown content.
 
 In some cases, this can break your HTML output. You can use our [development testing script](https://gist.github.com/ColdHeat/085c47359ab86c18864135a198cbe505) to check if your HTML output will change and correct it accordingly.
 
 - ### Forms, Nonces, Sessions
 
-CTFd no longer directly injects values into the global session object for a theme. You may have used this as `{{ nonce }}` or `{{ id }}`. Instead these values should be accessed via the `Session` global as so: `{{ Session.nonce }}`.
+MCSCno longer directly injects values into the global session object for a theme. You may have used this as `{{ nonce }}` or `{{ id }}`. Instead these values should be accessed via the `Session` global as so: `{{ Session.nonce }}`.
 
-All of the public facing forms in CTFd have been converted to form globals with WTForms. You can access them via the `Form` global in Jinja. For example, `{{ Forms.auth.LoginForm() }}`. A `{{ form.nonce() }}` function is available on all forms for easier access to the CSRF nonce as well.
+All of the public facing forms in MCSChave been converted to form globals with WTForms. You can access them via the `Form` global in Jinja. For example, `{{ Forms.auth.LoginForm() }}`. A `{{ form.nonce() }}` function is available on all forms for easier access to the CSRF nonce as well.
 
 Old forms will still work if the nonce used in the form is updated to `{{ Session.nonce }}`.
 
@@ -751,11 +751,11 @@ In addition, challenge HTML is now rendered on the server side using a new `chal
 
 - ### Python 3
 
-CTFd v3 is Python 3 only.
+MCSCv3 is Python 3 only.
 
 - ### Docker image based on Debian
 
-The Docker image used in CTFd is now based on Debian.
+The Docker image used in MCSCis now based on Debian.
 
 - ### config.ini
 
@@ -765,7 +765,7 @@ Instead of editting `config.py` directly, it's now a better idea to edit `config
 
 **General**
 
-- CTFd is now Python 3 only
+- MCSCis now Python 3 only
 - Render markdown with the CommonMark spec provided by `cmarkgfm`
 - HTML/Markdown content is now rendered on the server side in most cases.
   - This includes challenge descriptions, hint content, and page content
@@ -775,7 +775,7 @@ Instead of editting `config.py` directly, it's now a better idea to edit `config
 - User sessions no longer store any user-specific attributes.
   - Sessions only store the user's ID, CSRF nonce, and an hmac of the user's password
   - This allows for session invalidation on password changes
-- The user facing side of CTFd now has user and team searching
+- The user facing side of MCSCnow has user and team searching
 - Accept additional profile fields during registration (affiliation, website, country)
   - This does not add additional inputs. Themes or additional JavaScript can add the form inputs.
 
@@ -815,9 +815,9 @@ Instead of editting `config.py` directly, it's now a better idea to edit `config
 
 - Challenge plugins have changed in structure to better allow integration with themes and prevent obtrusive Javascript/XSS.
   - Challenge rendering now uses `challenge.html` from the provided theme.
-  - Accessing the challenge view content is now provided by `/api/v1/challenges/<challenge_id>` in the `view` section. This allows for HTML to be properly sanitized and rendered by the server allowing CTFd to remove client side Jinja rendering.
+  - Accessing the challenge view content is now provided by `/api/v1/challenges/<challenge_id>` in the `view` section. This allows for HTML to be properly sanitized and rendered by the server allowing MCSCto remove client side Jinja rendering.
   - `challenge.html` now specifies what's required and what's rendered by the theme. This allows the challenge plugin to avoid having to deal with aspects of the challenge besides the description and input.
-  - A more complete migration guide will be provided when CTFd v3 leaves beta
+  - A more complete migration guide will be provided when MCSCv3 leaves beta
 - Display current attempt count in challenge view when max attempts is enabled
 - `get_standings()`, `get_team_stanadings()`, `get_user_standings()` now has a fields keyword argument that allows for specificying additional fields that SQLAlchemy should return when building the response set.
   - Useful for gathering additional data when building scoreboard pages
@@ -932,15 +932,15 @@ Instead of editting `config.py` directly, it's now a better idea to edit `config
 
 **General**
 
-- CTFd is now Python 3 only
+- MCSCis now Python 3 only
 - Render markdown with the CommonMark spec provided by `cmarkgfm`
 - Render markdown stripped of any malicious JavaScript or HTML.
-  - This is a significant change from previous versions of CTFd where any HTML content from an admin was considered safe.
+  - This is a significant change from previous versions of MCSCwhere any HTML content from an admin was considered safe.
 - Inject `Config`, `User`, `Team`, `Session`, and `Plugin` globals into Jinja
 - User sessions no longer store any user-specific attributes.
   - Sessions only store the user's ID, CSRF nonce, and an hmac of the user's password
   - This allows for session invalidation on password changes
-- The user facing side of CTFd now has user and team searching
+- The user facing side of MCSCnow has user and team searching
 - GeoIP support now available for converting IP addresses to guessed countries
 
 **Admin Panel**
@@ -973,9 +973,9 @@ Instead of editting `config.py` directly, it's now a better idea to edit `config
 
 - Challenge plugins have changed in structure to better allow integration with themes and prevent obtrusive Javascript/XSS.
   - Challenge rendering now uses `challenge.html` from the provided theme.
-  - Accessing the challenge view content is now provided by `/api/v1/challenges/<challenge_id>` in the `view` section. This allows for HTML to be properly sanitized and rendered by the server allowing CTFd to remove client side Jinja rendering.
+  - Accessing the challenge view content is now provided by `/api/v1/challenges/<challenge_id>` in the `view` section. This allows for HTML to be properly sanitized and rendered by the server allowing MCSCto remove client side Jinja rendering.
   - `challenge.html` now specifies what's required and what's rendered by the theme. This allows the challenge plugin to avoid having to deal with aspects of the challenge besides the description and input.
-  - A more complete migration guide will be provided when CTFd v3 leaves beta
+  - A more complete migration guide will be provided when MCSCv3 leaves beta
 - Display current attempt count in challenge view when max attempts is enabled
 - `get_standings()`, `get_team_stanadings()`, `get_user_standings()` now has a fields keyword argument that allows for specificying additional fields that SQLAlchemy should return when building the response set.
   - Useful for gathering additional data when building scoreboard pages
@@ -1138,7 +1138,7 @@ Instead of editting `config.py` directly, it's now a better idea to edit `config
 - Fix flask-profiler and bump dependency to 1.8.1
 - Switch to using the `Faker` library for `populate.py` instead of hardcoded data
 - Add a `yarn lint` command to run eslint on JS files
-- Always insert the current CTFd version at the end of the import process
+- Always insert the current MCSCversion at the end of the import process
 - Fix issue where files could not be downloaded on Windows
 
 # 2.3.3 / 2020-04-12
@@ -1174,7 +1174,7 @@ Instead of editting `config.py` directly, it's now a better idea to edit `config
 **API**
 
 - Set `/api/v1/statistics/users` route to be admins_only
-- When POST'ing to `/api/v1/awards`, CTFd will look up a user's team ID if `team_id` is not specified
+- When POST'ing to `/api/v1/awards`, MCSCwill look up a user's team ID if `team_id` is not specified
 
 **Admin Panel**
 
@@ -1206,12 +1206,12 @@ Instead of editting `config.py` directly, it's now a better idea to edit `config
 
 **General**
 
-- During setup, admins can register their email address with the CTFd LLC newsletter for news and updates
+- During setup, admins can register their email address with the MCSCLLC newsletter for news and updates
 - Fix editting hints from the admin panel
 - Allow admins to insert HTML code directly into the header and footer (end of body tag) of pages. This replaces and supercedes the custom CSS feature.
   - The `views.custom_css` route has been removed.
 - Admins can now customize the content of outgoing emails and inject certain variables into email content.
-- The `manage.py` script can now manipulate the CTFd Configs table via the `get_config` and `set_config` commands. (e.g. `python manage.py get_config ctf_theme` and `python manage.py set_config ctf_theme core`)
+- The `manage.py` script can now manipulate the MCSCConfigs table via the `get_config` and `set_config` commands. (e.g. `python manage.py get_config ctf_theme` and `python manage.py set_config ctf_theme core`)
 
 **Themes**
 
@@ -1228,9 +1228,9 @@ Instead of editting `config.py` directly, it's now a better idea to edit `config
 
 # 2.2.3 / 2020-01-21
 
-### This release includes a critical security fix for CTFd versions >= 2.0.0
+### This release includes a critical security fix for MCSCversions >= 2.0.0
 
-All CTFd administrators are recommended to take the following steps:
+All MCSCadministrators are recommended to take the following steps:
 
 1. Upgrade their installations to the latest version
 2. Rotate the `SECRET_KEY` value
@@ -1238,7 +1238,7 @@ All CTFd administrators are recommended to take the following steps:
 
 **Security**
 
-- This release includes a fix for a vulnerability allowing an arbitrary user to take over other accounts given their username and a CTFd instance with emails enabled
+- This release includes a fix for a vulnerability allowing an arbitrary user to take over other accounts given their username and a MCSCinstance with emails enabled
 
 **General**
 
@@ -1263,7 +1263,7 @@ All CTFd administrators are recommended to take the following steps:
 
 ## Notice
 
-2.2.0 focuses on updating the front end of CTFd to use more modern programming practices and changes some aspects of core CTFd design. If your current installation is using a custom theme or custom plugin with **_any_** kind of JavaScript, it is likely that you will need to upgrade that theme/plugin to be useable with v2.2.0.
+2.2.0 focuses on updating the front end of MCSCto use more modern programming practices and changes some aspects of core MCSCdesign. If your current installation is using a custom theme or custom plugin with **_any_** kind of JavaScript, it is likely that you will need to upgrade that theme/plugin to be useable with v2.2.0.
 
 **General**
 
@@ -1307,7 +1307,7 @@ All CTFd administrators are recommended to take the following steps:
 - Create an `ezToast()` function to use [Bootstrap's toasts](https://getbootstrap.com/docs/4.3/components/toasts/)
 - The user-facing navbar now features icons
 - Awards shown on a user's profile can now have award icons
-- The default MarkdownIt render created by CTFd will now open links in new tabs
+- The default MarkdownIt render created by MCSCwill now open links in new tabs
 - Country flags can now be shown on the user pages
 
 **Deployment**
@@ -1326,7 +1326,7 @@ All CTFd administrators are recommended to take the following steps:
   - The subject allows for injecting custom variable via the new `CTFd.utils.formatters.safe_format()` function
 - Admin user information is now error checked during setup
 - Added yarn to the toolchain and the yarn dev, yarn build, yarn verify, and yarn clean scripts
-- Prevent old CTFd imports from being imported
+- Prevent old MCSCimports from being imported
 
 # 2.1.5 / 2019-10-2
 
@@ -1546,7 +1546,7 @@ All CTFd administrators are recommended to take the following steps:
 - Exports will now properly export JSON for all JSON columns
   - In some configurations the column would be exported as a string.
   - Legacy string columns will still be imported properly.
-- Exports from old 2.x CTFd versions should upgrade and be installed properly
+- Exports from old 2.x MCSCversions should upgrade and be installed properly
   - Any failure to do so should be considered a bug
 
 **Deployment**
@@ -1615,7 +1615,7 @@ All CTFd administrators are recommended to take the following steps:
 **Exports**
 
 - Exports are now saved on disk with `tempfile.NamedTemporaryFile()` instead of memory during creation
-- After importing an export, CTFd will now recreate all tables it expects to be available. This resolves an issue where tables created by plugins would be missing after an import.
+- After importing an export, MCSCwill now recreate all tables it expects to be available. This resolves an issue where tables created by plugins would be missing after an import.
 
 # 2.0.4 / 2019-01-30
 
@@ -1690,7 +1690,7 @@ Because of the necessary changes to the API, the previously used call to `fetch(
 - Show notification titles and allow for deleting notifications
   - Update notification UI in admin panel to be similar to the public-facing UI
 - Fix subdirectory deployments in a generic manner by modifying `request.path` to combine both `request.script_root` and `request.path`.
-  - Also create a request preprocessor to redirect users into the true CTFd app when deploying on a subdirectory.
+  - Also create a request preprocessor to redirect users into the true MCSCapp when deploying on a subdirectory.
   - Redirect to `request.full_path` instead of just `request.path`.
 - Fix `TestingConfig.SAFE_MODE` not being reset between tests.
 - Disable `value` input in dynamic challenge update field since we calculate it on the user's behalf.
@@ -1752,22 +1752,22 @@ If you are upgrading from a version prior to 2.0.0 please read the 2.0.0 change 
 
 2.0.0 is a _significant_, backwards-incompaitble release.
 
-Many unofficial plugins will not be supported in CTFd 2.0.0. If you're having trouble updating your plugins
-please join [the CTFd Slack](https://slack.ctfd.io/) for help and discussion.
+Many unofficial plugins will not be supported in MCSC2.0.0. If you're having trouble updating your plugins
+please join [the MCSCSlack](https://slack.ctfd.io/) for help and discussion.
 
 If you are upgrading from a prior version be sure to make backups and have a reversion plan before upgrading.
 
 - If upgrading from 1.2.0 please make use of the `migrations/1_2_0_upgrade_2_0_0.py` script as follows:
   1. Make all necessary backups. Backup the database, uploads folder, and source code directory.
   2. Upgrade the source code directory (i.e. `git pull`) but do not run any updated code yet.
-  3. Set the `DATABASE_URL` in `CTFd/config.py` to point to your existing CTFd database.
-  4. Run the upgrade script from the CTFd root folder i.e. `python migrations/1_2_0_upgrade_2_0_0.py`.
+  3. Set the `DATABASE_URL` in `CTFd/config.py` to point to your existing MCSCdatabase.
+  4. Run the upgrade script from the MCSCroot folder i.e. `python migrations/1_2_0_upgrade_2_0_0.py`.
      - This migration script will attempt to migrate data inside the database to 2.0.0 but it cannot account for every situation.
      - Examples of situations where you may need to manually migrate data:
        - Tables/columns created by plugins
        - Tables/columns created by forks
        - Using databases which are not officially supported (e.g. sqlite, postgres)
-  5. Setup the rest of CTFd (i.e. config.py), migrate/update any plugins, and run normally.
+  5. Setup the rest of MCSC(i.e. config.py), migrate/update any plugins, and run normally.
 - If upgrading from a version before 1.2.0, please upgrade to 1.2.0 and then continue with the steps above.
 
 **General**
@@ -1777,7 +1777,7 @@ If you are upgrading from a prior version be sure to make backups and have a rev
   - Use Team Mode if you want users to create and join teams to play together.
 - Integration with MajorLeagueCyber (MLC). (https://majorleaguecyber.org)
   - Organizers can register their event with MLC and will receive OAuth Client ID & Client Secret.
-  - Organizers can set those OAuth credentials in CTFd to allow users and teams to automatically register in a CTF.
+  - Organizers can set those OAuth credentials in MCSCto allow users and teams to automatically register in a CTF.
 - Data is now provided to the front-end via the REST API. (#551)
   - Javascript uses `fetch()` to consume the REST API.
 - Dynamic Challenges are built in.
@@ -1812,7 +1812,7 @@ If you are upgrading from a prior version be sure to make backups and have a rev
   - Javascript uses `fetch()` to consume the REST API.
 - The admin theme is no longer considered seperated from the core theme and should always be together.
 - Themes now use `url_for()` to generate URLs instead of hardcoding.
-- socket.io (via long-polling) is used to connect to CTFd to receive notifications.
+- socket.io (via long-polling) is used to connect to MCSCto receive notifications.
 - `ctf_name()` renamed to `get_ctf_name()` in themes.
 - `ctf_logo()` renamed to `get_ctf_logo()` in themes.
 - `ctf_theme()` renamed to `get_ctf_theme()` in themes.
@@ -1843,7 +1843,7 @@ If you are upgrading from a prior version be sure to make backups and have a rev
 - The `/chals` endpoint no longer lists the details of challenges.
   - The `/chals/:id` endpoint is now used to load challenge information before display.
 - Admins can now see what users have solved a given challenge from the admin panel.
-- Fixed issue with imports extracting files outside of the CTFd directory.
+- Fixed issue with imports extracting files outside of the MCSCdirectory.
 - Added import zipfile validation and optional size restriction.
 - The ctftime, authentication, and admin restrictions have been converted to decorators to improve code reuse.
   - 403 is now a more common status code. Previously it only indicated CSRF failure, now it can indicate login failure
@@ -1899,7 +1899,7 @@ If you are upgrading from a prior version be sure to make backups and have a rev
   - Plugin requirements are installed on image build.
   - Switched from the default gunicorn synchronous worker to gevent
 - Fixed an issue where ties would be broken incorrectly if there are challenges that are worth 0 points. (#577)
-- Fixed update checks not happening on CTFd start. (#595)
+- Fixed update checks not happening on MCSCstart. (#595)
 - Removed the static_html handler to access raw HTML files. (#561)
   - Pages is now the only supported means of accessing/creating a page.
 - Removed uwsgi specific configuration files.
@@ -1951,7 +1951,7 @@ If you are upgrading from a prior version be sure to make backups and have a rev
 
 - The original theme has been replaced by the core theme. The core theme is written in Bootstrap v4.0.0-beta.2 and significantly reduces the amount of custom styles/classes used.
 - Challenges can now be previewed from the admin panel.
-- The modals to modify files, flags, tags, and hints are no longer controlled by Challenge Type Plugins and are defined in CTFd itself.
+- The modals to modify files, flags, tags, and hints are no longer controlled by Challenge Type Plugins and are defined in MCSCitself.
 - The admin graphs and admin statistics pages have been combined.
 - Percentage solved for challenges has been moved to the new statistics page.
 - The scoregraph on the scoreboard has been cleaned up to better fit the page width.
@@ -1980,7 +1980,7 @@ If you are upgrading from a prior version be sure to make backups and have a rev
 
 - CTFs can now be paused to prevent solves.
 - A new authed_only decorator is available to restrict pages to logged-in users.
-- CTFd will now check for updates against `versioning.ctfd.io`. Admins will see in the admin panel that CTFd can be updated.
+- MCSCwill now check for updates against `versioning.ctfd.io`. Admins will see in the admin panel that MCSCcan be updated.
 - A ratelimit function has been implemented. Authentication and email related functions are now ratelimited.
 - Code coverage from codecov.
 - Admins can now see the reason why an email to a team failed to send.
@@ -2060,20 +2060,20 @@ If you are upgrading from a prior version be sure to make backups and have a rev
 - Challenges can now have max attempts set on a per challenge level
 - Setup now automatically logs you in as an admin. Don't leave your CTFs unconfigured!
 - Tests are now executed by TravisCI! Help out by adding tests for functionality!
-- CTFd now has it's own Github organization!
+- MCSCnow has it's own Github organization!
 - From a plugin you can replace most of the utils functions used by CTFd. This allows plugins to replace even more functionality within CTFd
-- CTFd now has a concept of Hints!
+- MCSCnow has a concept of Hints!
 - You can now customize the challenge editting modals in the admin panel
-- There are now links to social media pages where you can follow CTFd to track updates.
-- CTFd now has the ability to export and import data. This lets you save your CTFs as zip files and redeploy them again and again.
+- There are now links to social media pages where you can follow MCSCto track updates.
+- MCSCnow has the ability to export and import data. This lets you save your CTFs as zip files and redeploy them again and again.
 
 # 1.0.1 / 2017-03-08
 
 - Challenge types
-  - This means CTFd now supports multiple kinds of challenges.
+  - This means MCSCnow supports multiple kinds of challenges.
   - Challenges are now modifiable with a plugin.
 - Solve types
-  - This means CTFd now supports multiple kinds of flags/keys.
+  - This means MCSCnow supports multiple kinds of flags/keys.
   - The flag/key logic is now modifiable with a plugin.
 - Plugins are now allowed a configuration page
 - The formerly massive admin.py is separated out into easier to work on chunks
