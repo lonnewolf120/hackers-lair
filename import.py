@@ -9,6 +9,6 @@ import sys
 app = create_app()
 with app.app_context():
     print(
-        "This file will be deleted in CTFd v4.0. Switch to using `python manage.py import_ctf`"
+        "This file will be deleted in MCSCv4.0. Switch to using `python manage.py import_ctf`"
     )
     import_ctf(sys.argv[1])

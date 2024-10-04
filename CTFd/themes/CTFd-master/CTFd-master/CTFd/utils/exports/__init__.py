@@ -100,7 +100,7 @@ def import_ctf(backup, erase=True):
     member_dirs = [os.path.split(m)[0] for m in members if "/" in m]
     if "db" not in member_dirs:
         raise Exception(
-            'CTFd couldn\'t find the "db" folder in this backup. '
+            'MCSC couldn\'t find the "db" folder in this backup. '
             "The backup may be malformed or corrupted and the import process cannot continue."
         )
 
@@ -129,7 +129,7 @@ def import_ctf(backup, erase=True):
         "e62fd69bd417",
     ):
         raise Exception(
-            "The version of CTFd that this backup is from is too old to be automatically imported."
+            "The version of MCSC that this backup is from is too old to be automatically imported."
         )
 
     if erase:

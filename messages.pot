@@ -170,7 +170,7 @@ msgid "Theme"
 msgstr ""
 
 #: CTFd/forms/setup.py:77
-msgid "CTFd Theme to use. Can be changed later."
+msgid "MCSC Theme to use. Can be changed later."
 msgstr ""
 
 #: CTFd/forms/setup.py:84
@@ -543,7 +543,7 @@ msgid "Control the visibility of different sections of CTFd"
 msgstr ""
 
 #: CTFd/themes/core-beta/templates/setup.html:232
-msgid "Subscribe email address to the CTFd LLC Newsletter for news and updates"
+msgid "Subscribe email address to the MCSC Newsletter for news and updates"
 msgstr ""
 
 #: CTFd/themes/core-beta/templates/setup.html:309
