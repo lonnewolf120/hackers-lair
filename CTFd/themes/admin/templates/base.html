@@ -118,7 +118,9 @@
 	</nav>
 
 	<main role="main">
-		{% if get_config('version_latest') %}
+
+		{% comment %}
+		{% if get_config('version_latest') %} 
 		<div class="container-fluid bg-warning text-center py-3">
 			<div class="row">
 				<div class="col-md-12">
@@ -131,6 +133,7 @@
 		{% endif %}
 		{% block content %}
 		{% endblock %}
+		{% endcomment %}
 	</main>
 
 	<footer class="footer pt-2">
